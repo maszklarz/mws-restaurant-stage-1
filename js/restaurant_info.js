@@ -31,6 +31,20 @@ initMap = () => {
       }).addTo(newMap);
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
+
+      // Remove the map from tab chain
+      document.getElementById("map").setAttribute("tabindex", "-1");
+      // Remove map markers from tab chain
+      Array.from(document.getElementsByClassName('leaflet-marker-icon')).forEach(function(element){
+        element.setAttribute("tabindex", "-1");
+      });
+      // Remove map attribution links from tab chain
+      Array.from(document.getElementsByClassName('leaflet-control-attribution')[0].children).forEach(function(element){
+        element.setAttribute("tabindex", "-1");
+      });
+      // remove zoom in/out from tab chain
+      document.getElementsByClassName('leaflet-control-zoom-in')[0].setAttribute("tabindex", "-1");
+      document.getElementsByClassName('leaflet-control-zoom-out')[0].setAttribute("tabindex", "-1");
     }
   });
 }
